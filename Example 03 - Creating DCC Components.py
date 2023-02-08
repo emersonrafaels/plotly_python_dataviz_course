@@ -22,6 +22,7 @@ database = {
 # NÃO APARECER O MODE BAR
 config = {"displayModeBar": False}
 
+# DEFININDO OS WIDGETS QUE ESTARÃO EM TELA
 app.layout = Div(
     children=[
         H1('Evento X'),
@@ -63,5 +64,5 @@ app.layout = Div(
     ]
 )
 
-
+# INICIANDO O SERVIDOR
 app.run_server(debug=True)
