@@ -11,7 +11,9 @@ app.layout = Div(
     children=[
         DCCInput(id='meu_input1', value='Valor do input1'),
         Br(),
+        DCCInput(id='meu_input2', value='Valor do input2'),
         P(id='output1'),
+        P(id='output2')
     ]
 )
 
@@ -19,24 +21,33 @@ app.layout = Div(
 """
 
     DCC1: AO ALTERAR O OBJECT COM ID: MEU_INPUT1 (QUE É UM INPUT)
-    
+
     O CHILDREN DO OBJECT COM ID: OUTPUT1 (QUE É UMA TAG HTML P)
     SOFRERÁ ALTERAÇÃO
-    
-    O CHILDREN RECEBERÁ O RETORNO DA FUNÇÃO DE CALLBACK.
-    
+
+    E
+
+    DCC2: AO ALTERAR O OBJECT COM ID: MEU_INPUT2 (QUE É UM INPUT)
+
+    O CHILDREN DO OBJECT COM ID: OUTPUT2 (QUE É UMA TAG HTML P)
+    TAMBÉM SOFRERÁ ALTERAÇÃO
+
+    OS CHILDRENS RECEBERÃO O RETORNO DA FUNÇÃO DE CALLBACK.
+
 """
 
 @app.callback(
     [
         Output('output1', 'children'),
+        Output('output2', 'children')
     ],
     [
-        Input('meu_input1', 'value')
+        Input('meu_input1', 'value'),
+        Input('meu_input2', 'value'),
     ]
 )
-def meu_callback(meu_input1):
-    return meu_input1
+def meu_callback(meu_input1, meu_input2):
+    return meu_input1, meu_input2
 
 
-app.run_server()
+app.run_server(debug=True)

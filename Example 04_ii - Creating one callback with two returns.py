@@ -9,7 +9,7 @@ app = Dash(__name__)
 # DEFININDO OS WIDGETS QUE ESTARÃO EM TELA
 app.layout = Div(
     children=[
-        DCCInput(id='meu_input1', value='batatinha frita'),
+        DCCInput(id='meu_input1', value='Valor do input1'),
         Br(),
         P(id='output1'),
         P(id='output2')
