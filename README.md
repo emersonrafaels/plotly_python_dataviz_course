@@ -45,3 +45,7 @@ Feito sobre [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` cria g
         - Uso do dash table
     
     - Example 04_i - Creating one callback with one return
+        - Uso de callbacks: Um valor de input e um valor de return
+    
+    - Example 04_ii - Creating one callback with two returns
+        - Uso de callbacks: Um valor de input e dois valores de return

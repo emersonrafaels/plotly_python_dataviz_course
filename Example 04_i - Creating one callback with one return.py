@@ -28,15 +28,12 @@ app.layout = Div(
 """
 
 @app.callback(
-    [
-        Output('output1', 'children'),
-    ],
-    [
-        Input('meu_input1', 'value')
-    ]
+    Output(component_id='output1', component_property='children'),
+    Input(component_id='meu_input1', component_property='value')
 )
 def meu_callback(meu_input1):
-    return meu_input1
+    print(meu_input1)
+    return (meu_input1,)
 
 
 app.run_server()
