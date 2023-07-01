@@ -1,6 +1,8 @@
 from random import randint
 
-from dash import Dash
+import pandas as pd
+import numpy as np
+from dash import Dash, dash_table
 from dash.html import Div, H1, P, H3
 from dash.dcc import Graph, Dropdown, Slider, Checklist
 
@@ -33,7 +35,7 @@ app.layout = Div(
                 {'label': 'Bebes', 'value': 'bebes'},
                 {'label': 'Maiores de idade', 'value': 'maiores'}
             ],
-            value='maiores'
+            value='result_dropdown'
         ),
         Slider(
             min=0,
@@ -48,6 +50,8 @@ app.layout = Div(
                 {'label': 'Maiores de idade', 'value': 'maiores'}
             ]
         ),
+        dash_table.DataTable(data=pd.DataFrame(database).to_dict('records'),
+                             page_size=10),
         Graph(
             id="example-graph-line",
             config=config,
@@ -59,6 +63,7 @@ app.layout = Div(
                         'name': 'Maiores'
                     },
                 ],
+
             }
         )
     ]
