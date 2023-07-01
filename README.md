@@ -59,3 +59,10 @@ Feito sobre [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` cria g
         - Atualização de um gráfico plotly, dado o input do checklist e dropdown
             - Checklist: Atualiza os dados que são mostrados
             - Dropdown: Escolhe qual o tipo de gráfico irá ser mostrado.
+            
+     - Example 07 - Checklist
+        - Criando um dash core components: checklist
+     
+     - Example 08 - Dash Interval
+        - Criando um dash core components: Interval - Componente que irá atualizar um callback periodicamente.
+            Com o interval, teremos um app atualizado em tempo real.
