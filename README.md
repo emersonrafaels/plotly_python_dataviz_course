@@ -49,3 +49,13 @@ Feito sobre [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` cria g
     
     - Example 04_ii - Creating one callback with two returns
         - Uso de callbacks: Um valor de input e dois valores de return
+    
+    - Example 05 - Creating one callback with two inputs and two returns
+        - Uso de callbacks: Dois valores de input e dois valores de return
+        
+    - Example 06 - Dash React
+        - Uso de dropdown
+        - Uso de checklist
+        - Atualização de um gráfico plotly, dado o input do checklist e dropdown
+            - Checklist: Atualiza os dados que são mostrados
+            - Dropdown: Escolhe qual o tipo de gráfico irá ser mostrado.

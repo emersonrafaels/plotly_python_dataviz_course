@@ -3,65 +3,77 @@ from random import randint
 
 from dash import Dash
 from dash.html import Div, H1, P, H3
-from dash.dcc import Graph, Dropdown, Slider, Checklist
+from dash.dcc import (
+    Graph, Dropdown, Slider,
+    Checklist, Interval
+)
 from dash.dependencies import Input, Output
-
-def get_data(number_instances=10):
-
-    database = {
-        'index': list(range(number_instances)),
-        'maiores': [randint(1, 1000) for _ in range(number_instances)],
-        'menores': [randint(1, 1000) for _ in range(number_instances)],
-        'bebes': [randint(1, 1000) for _ in range(number_instances)],
-    }
-
-    return database
 
 # INICIANDO O APP
 app = Dash(__name__)
 
-# OBTENDO OS DADOS
-database = get_data(number_instances=30)
+# QUANTIDADE DAS INSTÂNCIAS
+N = 20
+
+# INICIANDO O DATABASE QUE ARMAZENARÁ OS DADOS
+database = {
+    'index': [],
+    'maiores': [],
+    'menores': [],
+    'bebes': [],
+}
 
 # DEFININDO OS WIDGETS QUE ESTARÃO EM TELA
 app.layout = Div(
     children=[
         H1('Evento {}'.format(datetime.today().year)),
-        H3('Escolha a faixa de idade que deseja analisar'),
+        H3('idade das pessoas que foram ao evento'),
+        Interval(id='interval'),
         Checklist(
-            id='component_checklist',
+            id='meu_check_list',
             options=[
                 {'label': 'Menores de Idade', 'value': 'menores'},
                 {'label': 'Bebes', 'value': 'bebes'},
                 {'label': 'Maiores de idade', 'value': 'maiores'}
             ],
-            value=['bebes'] # Default
+            value=['bebes']
         ),
-        H3('Escolha o tipo de gráfico desejado'),
         Dropdown(
-            id='component_dropdown',
+            id='meu_dropdown',
             options=[
                 {'label': 'Linha', 'value': 'line'},
                 {'label': 'Barra', 'value': 'bar'},
             ],
-            value='line' # Default
+            value='line'
         ),
         Graph(
-            id='component_graph',
+            id='meu_grafico',
             config={'displayModeBar': False},
         )
     ]
 )
 
-# DEFININDO O CALLBACK
+
+def update_database(value):
+    """Minha query / Atualização do pandas."""
+    database['index'].append(value)
+    database['menores'].append(randint(1, 200))
+    database['maiores'].append(randint(1, 200))
+    database['bebes'].append(randint(1, 200))
+
+
 @app.callback(
-    Output('component_graph', 'figure'),
+    Output('meu_grafico', 'figure'),
     [
-        Input('component_checklist', 'value'),
-        Input('component_dropdown', 'value'),
+        Input('meu_check_list', 'value'),
+        Input('meu_dropdown', 'value'),
+        Input('interval', 'n_intervals'),
     ]
 )
-def graph_callback(input_data, graph_type):
+def my_callback(input_data, graph_type, n_intervals):
+
+    # ATUALIZANDO O DATABASE
+    update_database(n_intervals)
 
     # INICIANDO O GRÁFICO COM DADOS VÁZIOS
     grafico = {
@@ -73,8 +85,8 @@ def graph_callback(input_data, graph_type):
     for x in input_data:
         grafico['data'].append(
             {
-                'y': database[x],
-                'x': database['index'],
+                'y': database[x][-20:],
+                'x': database['index'][-20:],
                 'name': x,
                 'type': graph_type
             },
