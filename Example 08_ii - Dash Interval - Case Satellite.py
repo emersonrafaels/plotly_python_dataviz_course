@@ -31,7 +31,8 @@ app.layout = html.Div(
         dcc.Graph(id='live-update-graph'),
         dcc.Interval(
             id='interval-component',
-            interval=1*1000, # in milliseconds
+            disabled=False, # Se True, o contador não irá atualizar
+            interval=1*1000, # Incrementa o contador n_intervals a cada interval milliseconds
             n_intervals=0
         )
     ])
