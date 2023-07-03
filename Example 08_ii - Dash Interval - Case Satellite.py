@@ -24,6 +24,9 @@ app = Dash(__name__, external_stylesheets=external_stylesheets)
 app.layout = html.Div(
     html.Div([
         html.H4('TERRA Satellite Live Feed'),
+        html.Div(children=[
+        dcc.Slider(min=0.5, max=5, step=0.5, value=1, id='interval-refresh'),
+        ], style={'width': '20%'}),
         html.Div(id='live-update-text'),
         dcc.Graph(id='live-update-graph'),
         dcc.Interval(
@@ -33,6 +36,12 @@ app.layout = html.Div(
         )
     ])
 )
+
+@callback(
+    [Output(component_id='interval-component', component_property='interval')],
+    [Input('interval-refresh', 'value')])
+def update_refresh_rate(value):
+    return [value * 1000]
 
 
 @callback(Output('live-update-text', 'children'),
