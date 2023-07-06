@@ -107,15 +107,22 @@ grid = dag.AgGrid(
 
 layout = html.Div(
     children=[
+        # HEADER
         html.H1(
-            children="PÁGINA DE RESULTADOS DO MODELO DE FUNIL",
-            style={"margin-top": 0, "margin-bottom": 20, "margin-right": 20},
+            id="app-page-header",
+            children="RESULTADOS DO MODELO DE FUNIL",
+            style={"color": "black",
+                   "border": "None",
+                   "background": "#ffffff",
+                   "padding": 10},
         ),
+        # LINHA SEPARADORA
+        html.Hr(),
         dbc.Row(
             [
                 dbc.Col(
                     [
-                        # TÍTULO
+                        # TÍTULO DA COLUNA
                         html.H4(children="Resultado - Modelo do Funil"),
                         # DATATABLE
                         grid,
@@ -133,7 +140,7 @@ layout = html.Div(
                 ),
                 dbc.Col(
                     [
-                        # TÍTULO
+                        # TÍTULO DA COLUNA
                         html.H4(
                             children="Quantidade de Ag - Etapa Funil",
                             style={"margin-bottom": "0"},
