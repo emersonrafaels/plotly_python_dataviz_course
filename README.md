@@ -60,9 +60,15 @@ Feito sobre [plotly.js](https://github.com/plotly/plotly.js), `plotly.py` cria g
             - Checklist: Atualiza os dados que são mostrados
             - Dropdown: Escolhe qual o tipo de gráfico irá ser mostrado.
             
-     - Example 07 - Checklist
+    - Example 07 - Checklist
         - Criando um dash core components: checklist
-     
-     - Example 08 - Dash Interval
+    
+    - Example 08 - Dash Interval
         - Criando um dash core components: Interval - Componente que irá atualizar um callback periodicamente.
             Com o interval, teremos um app atualizado em tempo real.
+    
+    - APP_DASH_EXAMPLE_01
+        - Criação de APP multi pages
+        - Criação de página com estrutura de div, row, cols.
+        - Inclusão de um plotly graph object dentro de um dash graph.
+         
