@@ -72,3 +72,11 @@
   margin-right: 2rem;
   padding: 2rem 1rem;
 }
+
+.graph-barplot::before {
+  content: "";
+  display: block;
+  background-size: cover;
+  width: 100px; /* ajuste a largura conforme necessário */
+  height: 100px; /* ajuste a altura conforme necessário */
+}

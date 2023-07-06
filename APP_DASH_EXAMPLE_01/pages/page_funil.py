@@ -9,6 +9,7 @@ import dash.html as html
 import dash_bootstrap_components as dbc
 import dash_ag_grid as dag
 import plotly.express as px
+import plotly.graph_objects as go
 
 from dynaconf import settings
 
@@ -47,13 +48,21 @@ def create_data_funnel():
 df = load_data(dir_data)
 df_funnel, df_groupby_count_funnel = create_data_funnel()
 
+# CORES PARA OS GRÁFICOS
+colors = ["#f94144", "#f3722c", "#f8961e", "#f9c74f", "#90be6d", "#43aa8b", "#577590"]
+
+# LAYOUT PARA GO FIGURE
+layout = go.Layout(
+    paper_bgcolor='rgba(0,0,0,0)',
+    plot_bgcolor='rgba(0,0,0,0)',
+)
+
 # BARPLOT
-fig_barplot = px.bar(df_groupby_count_funnel,
-                     x="GROUP FUNNEL",
-                     y="QUANTIDADE",
-                     color="GROUP FUNNEL LABEL",
-                     text_auto=True,
-                     labels={"GROUP FUNNEL LABEL": "GRUPO FUNIL"})
+fig_barplot = go.Figure(data=[go.Bar(
+    x=df_groupby_count_funnel["GROUP FUNNEL LABEL"],
+    y=df_groupby_count_funnel["QUANTIDADE"],
+    marker_color=colors
+)], layout=layout)
 
 # FORMATANDO O DATATABLE COM AGGRID
 grid = dag.AgGrid(
@@ -102,11 +111,16 @@ layout = html.Div(
         html.Div(
             children=[
                 # TÍTULO
-                html.H1(children="Resultado - Quantidade de ag. por etapa do funil"),
+                html.H1(children="Resultado - Quantidade de ag. - Etapa Funil",
+                        style={"margin-bottom": "0"}),
                 # GRÁFICO DE BARRAS
-                dcc.Graph(figure=fig_barplot),
+                dcc.Graph(id='graph-barplot',
+                          figure=fig_barplot,
+                          config={'displayModeBar': False},
+                          responsive=True,
+                          style={"margin-top": "0"}),
             ],
-            style={"margin-top": 20, "margin-right": 20},
+            style={"margin-top": 20, "margin-bottom": "0", "margin-right": 20},
         ),
     ]
 )
