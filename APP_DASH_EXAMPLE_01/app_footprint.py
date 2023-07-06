@@ -11,64 +11,23 @@ from dash.dependencies import Input, Output
 from plotly import graph_objs as go
 from plotly.graph_objs import *
 
+from pages import page_sidebar
+
 
 app = dash.Dash(
-    __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}],
+    __name__,
+    meta_tags=[{"name": "viewport", "content": "width=device-width"}],
 )
 app.title = "APP - Footprint - PD"
 server = app.server
 
 # Layout of Dash App
-APP_LOGO = app.get_asset_url('itau.png')
+APP_LOGO = app.get_asset_url("itau.png")
 
-app = dash.Dash(
-    external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.FONT_AWESOME]
-)
+app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP, dbc.icons.FONT_AWESOME])
 
-sidebar = html.Div(
-    [
-        html.Div(
-            [
-                # width: 3rem ensures the logo is the exact width of the
-                # collapsed sidebar (accounting for padding)
-                html.Img(src=APP_LOGO, style={"width": "3rem"}),
-                html.H2("Footprint - PD"),
-            ],
-            className="sidebar-header",
-        ),
-        html.Hr(),
-        dbc.Nav(
-            [
-                dbc.NavLink(
-                    [html.I(className="fa-solid fa-house"),
-                     html.Span("Home", className="text-side-bar")
-                     ],
-                    href="/",
-                    active="exact",
-                ),
-                dbc.NavLink(
-                    [
-                        html.I(className="fa-solid fa-filter"),
-                        html.Span("Funil", className="text-side-bar"),
-                    ],
-                    href="/pd_funil",
-                    active="exact",
-                ),
-                dbc.NavLink(
-                    [
-                        html.I(className="fa-solid fa-ranking-star"),
-                        html.Span("Ranking", className="text-side-bar"),
-                    ],
-                    href="/pd_ranking",
-                    active="exact",
-                ),
-            ],
-            vertical=True,
-            pills=True,
-        ),
-    ],
-    className="sidebar",
-)
+
+sidebar = page_sidebar.layout
 
 content = html.Div(id="page-content", className="content")
 
@@ -93,6 +52,7 @@ def render_page_content(pathname):
         ],
         className="p-3 bg-light rounded-3",
     )
+
 
 if __name__ == "__main__":
     app.run_server(debug=True)

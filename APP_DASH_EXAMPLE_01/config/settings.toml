@@ -1,0 +1,7 @@
+[default]
+STYLES_CSS = 'assets/style.css'
+LOGO_APP = "assets/itau.png"
+
+
+[development]
+DATA_DIR_AGENCIAS = "data/BASE_COM_CEP.xlsx"
